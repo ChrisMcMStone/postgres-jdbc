@@ -1,0 +1,46 @@
+DATA DEFINITION
+
+Student
+studentID - Primary Key, char(7), NOT NULL
+titleID - Foreign Key, oid, NOT NULL
+forename - varchar(35), NOT NULL
+familyName - varchar(35), NOT NULL
+dateOfBirth - date, NOT NULL
+
+Lecturer
+lecturerID - Primary Key, char(5), NOT NULL
+titleID - Foreign Key, oid, NOT NULL
+forename - varchar(35), NOT NULL
+familyName - varchar(35), NOT NULL
+
+Module
+moduleID - Primary Key, char(6), NOT NULL
+moduleName - varchar(50), NOT NULL 
+moduleDescription - text
+lecturerID - Foreign Key, char(5), NOT NULL
+
+Marks
+studentID - Foreign Key, char(7), NOT NULL
+moduleID - Foreign Key, char(6), NOT NULL
+year - smallint, NOT NULL
+typeID - Foreign Key, oid
+mark - smallint, <=100
+notes - text
+
+StudentContact
+studentID - Foreign Key, char(7), NOT NULL
+eMailAddress - varchar(254), NOT NULL
+postalAddress - varchar(8), NOT NULL
+
+NextOfKinContact
+studentID - Foreign Key, char(7), NOT NULL
+eMailAddress - varchar(254), NOT NULL
+postalAddress - varchar(8), NOT NULL
+
+Titles
+titleID - Primary Key, NOT NULL
+titleString - varchar(20), NOT NULL
+
+Type
+typeID - Primary Key, oid, NOT NULL
+typeString - varchar(20), NOT NULL
