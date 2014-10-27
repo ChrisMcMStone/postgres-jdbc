@@ -4,6 +4,10 @@ import javax.sql.*;
 
 public class DBConnect {
 
+	private static String DBNAME = "jdbc:postgresql://dbteach2.cs.bham.ac.uk/cxm373";
+	private static String USERNAME = "cxm373";
+	private static String PASSWORD = "computer2014";
+
 	public static void main(String[] args) {
 		Connection dbConn = connect();
 		dropTables(dbConn);
@@ -12,7 +16,6 @@ public class DBConnect {
 		try {
 			dbConn.close();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 			System.out.println("Database connection failed to close.");
 		}
@@ -31,12 +34,10 @@ public class DBConnect {
 		
 		System.out.println("PostgreSQL driver registered.");
 		
-		String dbName = "jdbc:postgresql://dbteach2.cs.bham.ac.uk/cxm373";
-		
 		Connection dbConn = null;
 		
 		try {
-			 dbConn = DriverManager.getConnection(dbName, "cxm373", "computer2014");
+			 dbConn = DriverManager.getConnection(DBNAME, USERNAME, PASSWORD);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -55,7 +56,14 @@ public class DBConnect {
 		
 		PreparedStatement drop;
 		try {
-			drop = dbConn.prepareStatement("DROP TABLE IF EXISTS practice_table CASCADE");
+			drop = dbConn.prepareStatement("DROP TABLE IF EXISTS Student CASCADE;" + 
+					"DROP TABLE IF EXISTS Lecturer CASCADE;" + 
+					"DROP TABLE IF EXISTS Module CASCADE;" + 
+					"DROP TABLE IF EXISTS Marks CASCADE;" + 
+					"DROP TABLE IF EXISTS StudentContact CASCADE;" + 
+					"DROP TABLE IF EXISTS NextOfKinContact CASCADE;" + 
+					"DROP TABLE IF EXISTS Titles CASCADE;" + 
+					"DROP TABLE IF EXISTS Type CASCADE");
 			drop.execute();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -68,15 +76,36 @@ public class DBConnect {
 	
 	public static void createTables(Connection dbConn) {
 		
-		PreparedStatement create;
+		PreparedStatement createTitles;
+		PreparedStatement createStudent;
 		try {
-			create = dbConn.prepareStatement("CREATE TABLE practice_table( id serial, name varchar(10), PRIMARY KEY(id) );");
-			create.execute();
+			createTitles = dbConn.prepareStatement(
+					"Create Table Titles (" + 
+					"" + 
+					"titleID serial," + 
+					"titleString varchar(20) NOT NULL," + 
+					"" + 
+					"PRIMARY KEY (titleID)" + 
+					");");
+			createStudent = dbConn.prepareStatement(
+					"Create Table Student (" + 
+					"" + 
+					"studentID serial, " + 
+					"titleID serial," + 
+					"forename varchar(35) NOT NULL," + 
+					"familyName varchar(35) NOT NULL," + 
+					"dateOfBirth date NOT NULL CHECK(dateOfBirth < current_date)," + 
+					"" + 
+					"PRIMARY KEY (studentID)," + 
+					"FOREIGN KEY (titleID) REFERENCES Titles(titleID)" + 
+					");");
+			createTitles.execute();
+			createStudent.execute();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		
-		System.out.println("New table added.");
+		System.out.println("New tables added.");
 		
 	}
 }
