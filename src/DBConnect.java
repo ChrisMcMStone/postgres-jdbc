@@ -1,7 +1,5 @@
 import java.sql.*;
 
-import javax.sql.*;
-
 public class DBConnect {
 
 	private static String DBNAME = "jdbc:postgresql://dbteach2.cs.bham.ac.uk/cxm373";
