@@ -221,6 +221,26 @@ public class RandomName {
 	 * Gets a random surname.
 	 * @return A string containing the randomly-chosen surname
 	 */
+
+    public static String randomDate() {
+        return (int)((18 * 365) + (Math.random()*(47*365))) + "";
+    }
+
+    public static String randomPostCode() {
+
+        Random r = new Random();
+        char a = (char)(r.nextInt(26) + 'A');
+        char b = (char)(r.nextInt(26) + 'A');
+        char c = (char)(r.nextInt(26) + 'A');
+        char d = (char)(r.nextInt(26) + 'A');
+
+        int e = (r.nextInt(40) + 1);
+        int f = (r.nextInt(8)+1);
+
+        return "" + a + b + e + " " + f + c + d;
+
+    }
+
 	public static String getSurname() {
 		return SURNAMES[(new Random()).nextInt(SURNAMES.length)];
 	}
@@ -232,9 +252,12 @@ public class RandomName {
 	 * @param args Command-line arguments passed to program; currently unused
 	 */
 	public static void main(String[] args) {
-		for (int i = 1; i <= 300; i++) {
-			System.out.println(i + ": " + RandomName.getForename() + " " + RandomName.getSurname());
-		}
+
+        System.out.println(randomDate());
+
+//		for (int i = 1; i <= 300; i++) {
+//			System.out.println(i + ": " + RandomName.getForename() + " " + RandomName.getSurname());
+//		}
 	}
 
 }
