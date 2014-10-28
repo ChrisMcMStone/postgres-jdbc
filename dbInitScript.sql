@@ -20,13 +20,13 @@ FOREIGN KEY (titleID) REFERENCES Titles(titleID)
 
 Create Table Lecturer (
 
-lecturerID char(5) NOT NULL,
+lecturerID serial NOT NULL,
 titleID serial NOT NULL,
 forename varchar(35) NOT NULL,
 familyName varchar(35) NOT NULL,
 
 PRIMARY KEY (lecturerID),
-FOREIGN KEY (titleID) REFERENCES Titles(titleID),
+FOREIGN KEY (titleID) REFERENCES Titles(titleID)
 );
 
 Create Table Module (
@@ -41,10 +41,10 @@ FOREIGN KEY (lecturerID) REFERENCES Lecturer(lecturerID)
 );
 
 Create Table Type (
-titleID serial NOT NULL,
-titleString varchar(20) NOT NULL,
+typeID serial NOT NULL,
+typeString varchar(20) NOT NULL,
 
-PRIMARY KEY (titleID)
+PRIMARY KEY (typeID)
 );
 
 Create Table Marks (
@@ -78,5 +78,3 @@ postalAddress varchar(8) NOT NULL,
 
 FOREIGN KEY (studentID) REFERENCES Student(studentID)
 );
-
-
