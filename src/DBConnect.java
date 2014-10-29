@@ -163,7 +163,7 @@ public class DBConnect {
 					"" + 
 					"studentID serial NOT NULL," + 
 					"eMailAddress varchar(254) NOT NULL," + 
-					"postalAddress varchar(8) NOT NULL," + 
+					"postalAddress varchar(50) NOT NULL," +
 					"" + 
 					"FOREIGN KEY (studentID) REFERENCES Student(studentID)" + 
 					");");
@@ -173,7 +173,7 @@ public class DBConnect {
 					"" + 
 					"studentID serial NOT NULL," + 
 					"eMailAddress varchar(254) NOT NULL," + 
-					"postalAddress varchar(8) NOT NULL," + 
+					"postalAddress varchar(50) NOT NULL," +
 					"" + 
 					"FOREIGN KEY (studentID) REFERENCES Student(studentID)" + 
 					");");
@@ -309,9 +309,9 @@ public class DBConnect {
 
         StringBuilder studentContact = new StringBuilder("INSERT INTO StudentContact (studentID, eMailAddress, postalAddress) VALUES ");
         for(int i = 1; i < 104; i++) {
-            studentContact.append("(" + i +", 'student" + i + "@uni.ac.uk', '" + RandomName.randomPostCode() +  "'), ");
+            studentContact.append("(" + i +", 'student" + i + "@uni.ac.uk', '" + RandomName.getSurname() + " road, " + RandomName.randomPostCode() +  "'), ");
         }
-        studentContact.append("(" + 105 +", 'student" + 105 + "@uni.ac.uk', '" + RandomName.randomPostCode() +  "')");
+        studentContact.append("(" + 105 +", 'student" + 105 + "@uni.ac.uk', '" + RandomName.getSurname() + " road, " + RandomName.randomPostCode() +  "')");
         try{
             PreparedStatement addStudentContactDetails = dbConn.prepareStatement(studentContact.toString());
             addStudentContactDetails.execute();
@@ -324,9 +324,9 @@ public class DBConnect {
 
         StringBuilder nextOfKin = new StringBuilder("INSERT INTO NextOfKinContact (studentID, eMailAddress, postalAddress) VALUES ");
         for(int i = 1; i < 104; i++) {
-            nextOfKin.append("(" + i +", 'nextOfKin" + i + "@family.com', '" + RandomName.randomPostCode() +  "'), ");
+            nextOfKin.append("(" + i +", 'nextOfKin" + i + "@family.com', '" + RandomName.getSurname() + " road, " + RandomName.randomPostCode() +  "'), ");
         }
-        nextOfKin.append("(" + 105 +", 'nextOfKin" + 105 + "@family.com', '" + RandomName.randomPostCode() +  "')");
+        nextOfKin.append("(" + 105 +", 'nextOfKin" + 105 + "@family.com', '" + RandomName.getSurname() + " road, " + RandomName.randomPostCode() +  "')");
         try{
             PreparedStatement addNextOfKin = dbConn.prepareStatement(nextOfKin.toString());
             addNextOfKin.execute();
@@ -334,10 +334,8 @@ public class DBConnect {
             e.printStackTrace();
         }
         System.out.println("Next of kin contact details records added.");
-
-
         System.out.println("Database successfully populated.");
-        
+
     }
 }
 

@@ -3,4 +3,4 @@ bin/
 .settings/
 .idea/
 out/
-PostgreSQL DB application.iml
+*.iml
