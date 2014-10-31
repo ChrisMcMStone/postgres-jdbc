@@ -288,6 +288,15 @@ public class DBConnect {
         //Add Marks
 
         StringBuilder marksSQL = new StringBuilder("INSERT INTO Marks (studentID, moduleID, year, typeID, mark, notes) VALUES ");
+        marksSQL.append("(1, 1, 2000, 1, 100, 'abcd')," +
+                "(1, 1, 2002, 1, 50, 'abcd')," +
+                "(1, 2, 2002, 1, 100, 'abcd')," +
+                "(1, 3, 2004, 1, 100, 'abcd')," +
+                "(3, 1, 2000, 2, 20, 'abcd')," +
+                "(7, 1, 2000, 2, 13, 'abcd')," +
+                "(23, 1, 2000, 3, 39, 'abcd')," +
+                "(78, 1, 2000, 1, 50, 'abcd')," +
+                "(9, 1, 2000, 1, 100, 'abcd'),");
         String[] years = {"2014", "2013", "2012", "2011"};
         for(int i = 0; i < 30; i++) {
             for(String year : years) {
